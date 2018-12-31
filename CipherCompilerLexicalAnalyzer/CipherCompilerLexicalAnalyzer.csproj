@@ -52,6 +52,21 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ParserModel\BinaryOpParser.cs" />
+    <Compile Include="ParserModel\ConsoleOpParser.cs" />
+    <Compile Include="ParserModel\DFA.cs" />
+    <Compile Include="ParserModel\Exceptions.cs" />
+    <Compile Include="ParserModel\IdentifierParser.cs" />
+    <Compile Include="ParserModel\LettersSet.cs" />
+    <Compile Include="ParserModel\NumericParser.cs" />
+    <Compile Include="ParserModel\Parser.cs" />
+    <Compile Include="ParserModel\PunctuationOpParser.cs" />
+    <Compile Include="ParserModel\ReserveWordParser.cs" />
+    <Compile Include="ParserModel\State.cs" />
+    <Compile Include="ParserModel\StringParser.cs" />
+    <Compile Include="ParserModel\TerminatorOpParser.cs" />
+    <Compile Include="ParserModel\TokenParser.cs" />
+    <Compile Include="ParserModel\UninaryOpParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainForm.resx">

@@ -49,6 +49,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.idLstView = new System.Windows.Forms.ListView();
             this.btnGenerateTokens = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // codeTxtBox
@@ -236,12 +238,33 @@
             this.btnGenerateTokens.TabIndex = 20;
             this.btnGenerateTokens.Text = "Generate Tokens";
             this.btnGenerateTokens.UseVisualStyleBackColor = false;
+            this.btnGenerateTokens.Click += new System.EventHandler(this.btnGenerateTokens_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(13, 484);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(74, 13);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Error Window:";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.ForeColor = System.Drawing.Color.Red;
+            this.richTextBox1.Location = new System.Drawing.Point(16, 501);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(1131, 193);
+            this.richTextBox1.TabIndex = 22;
+            this.richTextBox1.Text = "";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1159, 494);
+            this.ClientSize = new System.Drawing.Size(1159, 706);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.btnGenerateTokens);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.idLstView);
@@ -293,6 +316,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ListView idLstView;
         private System.Windows.Forms.Button btnGenerateTokens;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
