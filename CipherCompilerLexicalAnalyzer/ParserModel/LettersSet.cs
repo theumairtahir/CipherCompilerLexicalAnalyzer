@@ -139,6 +139,7 @@ namespace DFAParser.ParserModel
         {
             //Method to get letters other than the selected letters
             List<char> lstTemp = new List<char>();
+            List<char> temp = new List<char>();
             foreach (var item in this.letters)
             {
                 //copying the list of letters to the temp list
@@ -149,7 +150,10 @@ namespace DFAParser.ParserModel
                 foreach (var item in letters)
                 {
                     if (item == lstTemp[i])
+                    {
                         lstTemp.RemoveAt(i); //if a char from the selected matches with a char in temp list then remove it
+                        i--; //get a step back because an item is removed from the array
+                    }
                 }
             }
             return lstTemp.ToArray();

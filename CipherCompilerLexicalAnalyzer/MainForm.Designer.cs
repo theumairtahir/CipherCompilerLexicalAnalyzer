@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.codeTxtBox = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.stringLstView = new System.Windows.Forms.ListView();
@@ -51,6 +52,7 @@
             this.btnGenerateTokens = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // codeTxtBox
@@ -68,11 +70,11 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Forte", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(162, 9);
+            this.label1.Location = new System.Drawing.Point(72, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(157, 52);
+            this.label1.Size = new System.Drawing.Size(368, 52);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Cipher";
+            this.label1.Text = "Cipher Compiler";
             // 
             // stringLstView
             // 
@@ -254,15 +256,28 @@
             this.richTextBox1.ForeColor = System.Drawing.Color.Red;
             this.richTextBox1.Location = new System.Drawing.Point(16, 501);
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(1131, 193);
             this.richTextBox1.TabIndex = 22;
             this.richTextBox1.Text = "";
             // 
+            // progressBar
+            // 
+            this.progressBar.ForeColor = System.Drawing.Color.LimeGreen;
+            this.progressBar.Location = new System.Drawing.Point(541, 37);
+            this.progressBar.MarqueeAnimationSpeed = 15;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(604, 23);
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar.TabIndex = 23;
+            // 
             // MainForm
             // 
+            this.AcceptButton = this.btnGenerateTokens;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1159, 706);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.btnGenerateTokens);
@@ -286,8 +301,10 @@
             this.Controls.Add(this.stringLstView);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.codeTxtBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Cipher Compiler";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -318,6 +335,7 @@
         private System.Windows.Forms.Button btnGenerateTokens;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 

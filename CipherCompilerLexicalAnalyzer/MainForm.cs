@@ -21,6 +21,7 @@ namespace CipherCompilerLexicalAnalyzer
         public MainForm()
         {
             InitializeComponent();
+            progressBar.Hide();
         }
         void GenerateTokensToFile()
         {
@@ -152,26 +153,35 @@ namespace CipherCompilerLexicalAnalyzer
 
         private void btnGenerateTokens_Click(object sender, EventArgs e)
         {
-            try
+            if (codeTxtBox.Lines.Length != 0)
             {
-                CodeTokenizer(codeTxtBox.Lines);
-                GenerateTokensToFile();
-                MessageBox.Show("Tokens Added to the file successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                progressBar.Show();
+                try
+                {
+                    CodeTokenizer(codeTxtBox.Lines);
+                    GenerateTokensToFile();
+                    MessageBox.Show("Tokens Added to the file successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                }
+                lstNumTokens = new List<string>();
+                lstIdTokens = new List<string>();
+                lstBinOpTokens = new List<string>();
+                lstUniOpTokens = new List<string>();
+                lstResTokens = new List<string>();
+                lstStringTokens = new List<string>();
+                lstTerminatorTokens = new List<string>();
+                lstPuncTokens = new List<string>();
+                lstConsoleOpTokens = new List<string>();
+                lsterrorText = new List<string>();
+                progressBar.Hide();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                MessageBox.Show("Nothing is written in the code block.","Proccess Terminated", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
-            lstNumTokens = new List<string>();
-            lstIdTokens = new List<string>();
-            lstBinOpTokens = new List<string>();
-            lstUniOpTokens = new List<string>();
-            lstResTokens = new List<string>();
-            lstStringTokens = new List<string>();
-            lstTerminatorTokens = new List<string>();
-            lstPuncTokens = new List<string>();
-            lstConsoleOpTokens = new List<string>();
-            lsterrorText = new List<string>();
         }
         void CodeTokenizer(string[] codeLines)
         {
