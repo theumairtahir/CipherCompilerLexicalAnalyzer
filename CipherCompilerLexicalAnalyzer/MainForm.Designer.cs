@@ -31,8 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.codeTxtBox = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.stringLstView = new System.Windows.Forms.ListView();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.numLstView = new System.Windows.Forms.ListView();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,6 +51,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // codeTxtBox
@@ -76,27 +75,10 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Cipher Compiler";
             // 
-            // stringLstView
-            // 
-            this.stringLstView.Location = new System.Drawing.Point(541, 82);
-            this.stringLstView.Name = "stringLstView";
-            this.stringLstView.Size = new System.Drawing.Size(116, 184);
-            this.stringLstView.TabIndex = 2;
-            this.stringLstView.UseCompatibleStateImageBehavior = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(538, 66);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "String:";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(538, 269);
+            this.label3.Location = new System.Drawing.Point(538, 66);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 13);
             this.label3.TabIndex = 5;
@@ -104,9 +86,9 @@
             // 
             // numLstView
             // 
-            this.numLstView.Location = new System.Drawing.Point(541, 285);
+            this.numLstView.Location = new System.Drawing.Point(541, 82);
             this.numLstView.Name = "numLstView";
-            this.numLstView.Size = new System.Drawing.Size(116, 184);
+            this.numLstView.Size = new System.Drawing.Size(116, 387);
             this.numLstView.TabIndex = 4;
             this.numLstView.UseCompatibleStateImageBehavior = false;
             // 
@@ -271,12 +253,24 @@
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar.TabIndex = 23;
             // 
+            // btnClear
+            // 
+            this.btnClear.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClear.Location = new System.Drawing.Point(12, 441);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(106, 28);
+            this.btnClear.TabIndex = 24;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // MainForm
             // 
-            this.AcceptButton = this.btnGenerateTokens;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnClear;
             this.ClientSize = new System.Drawing.Size(1159, 706);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label10);
@@ -297,8 +291,6 @@
             this.Controls.Add(this.binlstView);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.numLstView);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.stringLstView);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.codeTxtBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -314,8 +306,6 @@
 
         private System.Windows.Forms.RichTextBox codeTxtBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListView stringLstView;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListView numLstView;
         private System.Windows.Forms.Label label4;
@@ -336,6 +326,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Button btnClear;
     }
 }
 

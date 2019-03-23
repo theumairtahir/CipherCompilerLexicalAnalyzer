@@ -13,7 +13,6 @@ namespace CipherCompilerLexicalAnalyzer
         List<string> lstBinOpTokens = new List<string>();
         List<string> lstUniOpTokens = new List<string>();
         List<string> lstResTokens = new List<string>();
-        List<string> lstStringTokens = new List<string>();
         List<string> lstTerminatorTokens = new List<string>();
         List<string> lstPuncTokens = new List<string>();
         List<string> lstConsoleOpTokens = new List<string>();
@@ -22,61 +21,68 @@ namespace CipherCompilerLexicalAnalyzer
         {
             InitializeComponent();
             progressBar.Hide();
+            codeTxtBox.Hide();
         }
-        void GenerateTokensToFile()
+        void GetLines()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Tokens\";
-            Directory.CreateDirectory(path);
-            path += DateTime.Now.ToString("dd_MMMM_yy hhmmss") + ".txt";
+
+            string path = @"D:\New folder\Tokens\input.txt";
+            FileStream fStream = File.OpenRead(path);
+            StreamReader reader = new StreamReader(fStream);
+            string temp = reader.ReadToEnd();
+            codeTxtBox.Lines = new string[] { temp };
+            fStream.Close();
+            reader.Close();
+
+        }
+        bool GenerateTokensToFile()
+        {
+            bool flag = false;
+            //SaveFileDialog fileDialog = new SaveFileDialog();
+            //fileDialog.Filter = "Text files (*.txt) | *.txt";
+            string path = @"D:\New folder\Tokens\output.txt";
+            //if (fileDialog.ShowDialog() == DialogResult.OK)
+            //{
+
             FileStream fStream = File.OpenWrite(path);
             StreamWriter writer = new StreamWriter(fStream);
-            writer.WriteLine("Identifiers: ");
             foreach (var item in lstIdTokens)
             {
-                writer.WriteLine(item);
+                writer.WriteLine("<id," + item + ">");
             }
-            writer.WriteLine("Numerics: ");
             foreach (var item in lstNumTokens)
             {
-                writer.WriteLine(item);
+                writer.WriteLine("<num," + item + ">");
             }
-            writer.WriteLine("Strings: ");
-            foreach (var item in lstStringTokens)
-            {
-                writer.WriteLine(item);
-            }
-            writer.WriteLine("Binary Operators: ");
             foreach (var item in lstBinOpTokens)
             {
-                writer.WriteLine(item);
+                writer.WriteLine("<op," + item + ">");
             }
-            writer.WriteLine("Uninary Operators: ");
             foreach (var item in lstUniOpTokens)
             {
-                writer.WriteLine(item);
+                writer.WriteLine("<op," + item + ">");
             }
-            writer.WriteLine("Terminators: ");
             foreach (var item in lstTerminatorTokens)
             {
-                writer.WriteLine(item);
+                writer.WriteLine("<op," + item + ">");
             }
-            writer.WriteLine("Punctuations: ");
             foreach (var item in lstPuncTokens)
             {
-                writer.WriteLine(item);
+                writer.WriteLine("<op," + item + ">");
             }
-            writer.WriteLine("Reserve Words: ");
             foreach (var item in lstResTokens)
             {
-                writer.WriteLine(item);
+                writer.WriteLine("<key," + item + ">");
             }
-            writer.WriteLine("Console Operators: ");
             foreach (var item in lstConsoleOpTokens)
             {
-                writer.WriteLine(item);
+                writer.WriteLine("<key," + item + ">");
             }
             writer.Close();
             fStream.Close();
+            flag = true;
+            //}
+            return flag;
         }
         void AddIdentifierTokens()
         {
@@ -153,34 +159,33 @@ namespace CipherCompilerLexicalAnalyzer
 
         private void btnGenerateTokens_Click(object sender, EventArgs e)
         {
+            try
+            {
+                GetLines();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+            }
             if (codeTxtBox.Lines.Length != 0)
             {
+                btnClear_Click(sender, e);
                 progressBar.Show();
                 try
                 {
                     CodeTokenizer(codeTxtBox.Lines);
-                    GenerateTokensToFile();
-                    MessageBox.Show("Tokens Added to the file successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                    if (GenerateTokensToFile())
+                        MessageBox.Show("Tokens Added to the file successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 }
-                lstNumTokens = new List<string>();
-                lstIdTokens = new List<string>();
-                lstBinOpTokens = new List<string>();
-                lstUniOpTokens = new List<string>();
-                lstResTokens = new List<string>();
-                lstStringTokens = new List<string>();
-                lstTerminatorTokens = new List<string>();
-                lstPuncTokens = new List<string>();
-                lstConsoleOpTokens = new List<string>();
-                lsterrorText = new List<string>();
                 progressBar.Hide();
             }
             else
             {
-                MessageBox.Show("Nothing is written in the code block.","Proccess Terminated", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Nothing is written in the input code file.", "Proccess Terminated", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
         void CodeTokenizer(string[] codeLines)
@@ -188,7 +193,6 @@ namespace CipherCompilerLexicalAnalyzer
             try
             {
                 NumericParser np = new NumericParser();
-                StringParser sp = new StringParser();
                 IdentifierParser ip = new IdentifierParser();
                 BinaryOpParser bp = new BinaryOpParser();
                 UninaryOpParser up = new UninaryOpParser();
@@ -204,7 +208,6 @@ namespace CipherCompilerLexicalAnalyzer
                     lstNumTokens = np.GenerateTokens(item);
                     lstPuncTokens = pp.GenerateTokens(item);
                     lstResTokens = rp.GenerateTokens(item);
-                    lstStringTokens = sp.GenerateTokens(item);
                     lstTerminatorTokens = tp.GenerateTokens(item);
                     lstUniOpTokens = up.GenerateTokens(item);
                 }
@@ -229,17 +232,6 @@ namespace CipherCompilerLexicalAnalyzer
                 foreach (var item in lstTerminatorTokens)
                 {
                     TerminatorLstView.Items.Add(item);
-                }
-            }
-            catch (Exception ex)
-            {
-                lsterrorText.Add(">" + ex.Message);
-            }
-            try
-            {
-                foreach (var item in lstStringTokens)
-                {
-                    stringLstView.Items.Add(item);
                 }
             }
             catch (Exception ex)
@@ -315,5 +307,25 @@ namespace CipherCompilerLexicalAnalyzer
             richTextBox1.Lines = lsterrorText.ToArray();
         }
 
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            lstNumTokens = new List<string>();
+            lstIdTokens = new List<string>();
+            lstBinOpTokens = new List<string>();
+            lstUniOpTokens = new List<string>();
+            lstResTokens = new List<string>();
+            lstTerminatorTokens = new List<string>();
+            lstPuncTokens = new List<string>();
+            lstConsoleOpTokens = new List<string>();
+            lsterrorText = new List<string>();
+            numLstView.Clear();
+            idLstView.Clear();
+            binlstView.Clear();
+            unLstView.Clear();
+            resLstView.Clear();
+            TerminatorLstView.Clear();
+            PuncLstView.Clear();
+            conLstView.Clear();
+        }
     }
 }

@@ -41,11 +41,11 @@ namespace DFAParser.ParserModel
             }
             List<char> temp = new List<char>();
             //transition for others from state 2
-            for (int i = 'A'; i < 'Z'; i++)
+            for (int i = 'A'; i <= 'Z'; i++)
             {
                 temp.Add((char)i);
             }
-            for (int i = 'a'; i < 'z'; i++)
+            for (int i = 'a'; i <= 'z'; i++)
             {
                 temp.Add((char)i);
             }
@@ -54,7 +54,7 @@ namespace DFAParser.ParserModel
                 dfa.AddTransition(2, item, 5);
             }
             //other for state 3
-            for (int i = '0'; i < '9'; i++)
+            for (int i = '0'; i <= '9'; i++)
             {
                 temp.Add((char)i);
             }
