@@ -16,6 +16,7 @@ namespace CipherCompilerLexicalAnalyzer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //run
             Application.Run(new MainForm());
         }
     }
